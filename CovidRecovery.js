@@ -55,8 +55,6 @@ function CovidRecovery2021() {
     image(this.mapimg,0,0,width,height);
     
     
-    
-    
     for(i=0;i < this.colCountry.length ; i++)
     {
       var max;

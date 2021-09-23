@@ -31,7 +31,8 @@ function TechDiversityRace() {
 
     // Create a select DOM element.
     this.select = createSelect();
-    this.select.position(420, 150);
+    this.select.position(420, 250);
+    this.select.width
 
 
     // Fill the options with all company names.
@@ -69,7 +70,7 @@ function TechDiversityRace() {
     var labels = this.data.getColumn(0);
 
     // Colour to use for each category.
-    var colours = ['#6495ED', '#4682B4', '#00BFFF', '#6A5ACD', '#483D8B', '#5F9EA0'];
+    var colours = ['#162068', '#254A7F', '#377A97', '#4EADAF', '#69C7AF', '#9AD268'];
 
     // Make a title.
     var title = 'Employee diversity at ' + companyName;

@@ -65,16 +65,21 @@ function drawAxisLabels(xLabel, yLabel, layout) {
   textAlign('center', 'center');
 
   // Draw x-axis label.
+
+  fill(255)
+  textSize(25);
   text(xLabel,
        (layout.plotWidth() / 2) + layout.leftMargin,
-       layout.bottomMargin + (layout.marginSize * 1.5));
+       layout.bottomMargin + (layout.marginSize * 1.5) +20 );
 
   // Draw y-axis label.
   push();
-  translate(layout.leftMargin - (layout.marginSize * 1.5),
-            layout.bottomMargin / 2);
-  rotate(- PI / 2);
-  text(yLabel, 0, 0);
+  // translate(layout.leftMargin - (layout.marginSize * 1.5),
+  //           layout.bottomMargin / 2);
+  // rotate(- PI / 2);
+  fill(255)
+  textSize(25);
+  text(yLabel, 55, 10);
   pop();
 }
 
@@ -94,13 +99,14 @@ function drawYAxisTickLabels(min, max, layout, mapFunction,
     var y = mapFunction(value);
 
     // Add tick label.
+    fill(255)
     text(value.toFixed(decimalPlaces),
          layout.leftMargin - layout.pad,
          y);
 
     if (layout.grid) {
       // Add grid line.
-      stroke(200);
+      stroke(100);
       line(layout.leftMargin, y, layout.rightMargin, y);
     }
   }
@@ -115,13 +121,15 @@ function drawXAxisTickLabel(value, layout, mapFunction) {
   textAlign('center', 'center');
 
   // Add tick label.
+  fill(255)
+  
   text(value,
        x,
-       layout.bottomMargin + layout.marginSize / 2);
+       layout.bottomMargin+ layout.marginSize / 2 +10) ;
 
   if (layout.grid) {
     // Add grid line.
-    stroke(220);
+    stroke(120);
     line(x,
          layout.topMargin,
          x,

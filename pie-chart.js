@@ -15,6 +15,9 @@ function PieChart(x, y, diameter) {
 
     return radians;
   };
+  this.setup = function(){
+    arc.mouseOver(console.log(true))
+  }
 
   this.draw = function(data, labels, colours, title) {
 
@@ -38,6 +41,7 @@ Arrays must be the same length!`);
     var colour;
     var start;
     var stop;
+    let percentage;
     for (var i = 0; i < data.length; i++) {
       if (colours) {
         colour = colours[i];
@@ -50,7 +54,7 @@ Arrays must be the same length!`);
       strokeWeight(1);
       
       // Hack for 0!
-      
+        
           let distance = dist(this.x,this.y, mouseX, mouseY);
           let angle = acos((mouseX - this.x) / (distance));
           let ang;
@@ -59,16 +63,31 @@ Arrays must be the same length!`);
               angle = TWO_PI - angle;
             }
             if(angle >= lastAngle && angle <= lastAngle + angles[i] + 0.001){
-              
               ang = angles[i];
+              arc(this.x, this.y,
+                this.diameter, this.diameter,
+                lastAngle, lastAngle + angles[i] + 0.001);
+              fill(255)
+              ellipse(width/2,height/2,200,200)
+              fill(0)
+              textSize(30)
+              let x = angles[i] * 100
+              textAlign(CENTER)
+              text(Math.round(x) +  "%",(width/2) + 10,height/2)
+              console.log(ang+"\n")
               
-              console.log(ang)
               fill(123,104,238)
             }
           }
-          arc(this.x, this.y,
-            this.diameter, this.diameter,
-            lastAngle, lastAngle + angles[i] + 0.001);
+          else{
+            arc(this.x, this.y,
+              this.diameter, this.diameter,
+              lastAngle, lastAngle + angles[i] + 0.001);
+              fill(200)
+              ellipse(width/2,height/2,200,200)
+            
+          }
+            
             
        
       if (labels) {
@@ -77,10 +96,10 @@ Arrays must be the same length!`);
       
       lastAngle += angles[i];
     }
-
     if (title) {
       noStroke();
       textAlign('center', 'center');
+      fill(255)
       textSize(24);
       text(title, this.x, this.y - this.diameter * 0.6);
     }
@@ -88,27 +107,20 @@ Arrays must be the same length!`);
 
   this.makeLegendItem = function(label, i, colour) {
     var x = this.x + 50 + this.diameter / 2;
-    var y = this.y + (this.labelSpace * i) - this.diameter / 3;
+    var y = this.y + (this.labelSpace * 1.5 * i ) - this.diameter / 3;
     var boxWidth = this.labelSpace  / 2;
     var boxHeight = this.labelSpace / 2;
     fill(colour);
 
-    if((mouseX > x && mouseX < x + boxWidth) && (mouseY > y && mouseY < y + boxWidth))
-    {
-      boxWidth = boxWidth + 5;
-      boxHeight = boxHeight + 5;
-      x = x - 2.5;
-      y = y - 2.5;
-      fill(123,104,238)
-    }
+
 
     
-    rect(x, y, boxWidth, boxHeight);
+    rect(x, y, boxWidth + 20, boxHeight +20);
 
-    fill('black');
+    fill(255);
     noStroke();
     textAlign('left', 'center');
-    textSize(12);
-    text(label, x + boxWidth + 10, y + boxWidth / 2);
+    textSize(20);
+    text(label, x + boxWidth + 30, y + boxWidth +10 / 2);
   };
 }

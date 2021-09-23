@@ -6,7 +6,7 @@ var gallery;
 function setup() {
   // Create a canvas to fill the content div from index.html.
   canvasContainer = select('#app');
-  var c = createCanvas(1024, 576);
+  var c = createCanvas(1504, 846);
   c.parent('app');
 
   // Create a new gallery object.
@@ -16,14 +16,13 @@ function setup() {
   gallery.addVisual(new TechDiversityRace());
   gallery.addVisual(new CovidRecovery2021());
   gallery.addVisual(new TechDiversityGender());
-  gallery.addVisual(new PayGapByJob2017());
+  gallery.addVisual(new Stocks());
   gallery.addVisual(new PayGapTimeSeries());
-  gallery.addVisual(new ClimateChange());
-
 }
 
 function draw() {
-  background(240,248,255);
+  background("#171717");
+  
   if (gallery.selectedVisual != null) {
     gallery.selectedVisual.draw();
   }

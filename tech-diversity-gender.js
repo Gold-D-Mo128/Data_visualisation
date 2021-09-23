@@ -35,7 +35,7 @@ function TechDiversityGender() {
   this.midX = (this.layout.plotWidth() / 2) + this.layout.leftMargin;
 
   // Default visualisation colours.
-  this.femaleColour = color(138,43,226);
+
   this.maleColour = color(70,130,180);
 
   // Property to represent whether data has been loaded.
@@ -57,7 +57,7 @@ function TechDiversityGender() {
 
   this.setup = function() {
     // Font defaults.
-    textSize(16);
+    textSize(20);
   };
 
   this.destroy = function() {
@@ -89,26 +89,68 @@ function TechDiversityGender() {
       };
 
       // Draw the company name in the left margin.
-      fill(0);
+      fill(255);
       noStroke();
       textAlign('right', 'top');
       text(company.name,
            this.layout.leftMargin - this.layout.pad,
            lineY);
+           // Draw female employees rectangle.
+           let boolF = (mouseX > this.layout.leftMargin &&
+                        mouseX < this.layout.leftMargin + this.mapPercentToWidth(company.female) &&
+                        mouseY > lineY&&
+                        mouseY < lineY  + lineHeight - this.layout.pad)
+         
 
-      // Draw female employees rectangle.
-      fill(this.femaleColour);
-      rect(this.layout.leftMargin,
-           lineY,
-           this.mapPercentToWidth(company.female),
-           lineHeight - this.layout.pad);
+            if(boolF){
+              fill(78, 0, 161);
+              rect(this.layout.leftMargin - 5,
+                lineY - 10,
+                this.mapPercentToWidth(company.female),
+                lineHeight - this.layout.pad )
+                
+                push()
+                fill(255)
+                textSize(32);
+                textAlign(LEFT)
+                text(company.female + "%",(this.layout.leftMargin + this.mapPercentToWidth(company.female))/2, lineY-20)
+                pop()
+                
+              }
+              else{
+                fill(138,43,226);
+                rect(this.layout.leftMargin,
+                  lineY,
+                  this.mapPercentToWidth(company.female),
+                  lineHeight - this.layout.pad);
+                }
+                
+      let boolM = (mouseX > this.layout.leftMargin + this.mapPercentToWidth(company.female)
+                  && mouseX < this.layout.leftMargin + this.mapPercentToWidth(company.female) + this.mapPercentToWidth(company.male)
+                  && mouseY > lineY && mouseY < lineY + lineHeight - this.layout.pad)
 
       // Draw male employees rectangle.
-      fill(this.maleColour);
-      rect(this.layout.leftMargin + this.mapPercentToWidth(company.female),
-           lineY,
-           this.mapPercentToWidth(company.male),
-           lineHeight - this.layout.pad);
+      if(boolM){
+        fill(0, 70, 161);
+        rect(this.layout.leftMargin + this.mapPercentToWidth(company.female) -5,
+             lineY -10,
+             this.mapPercentToWidth(company.male),
+             lineHeight - this.layout.pad);
+             console.log(this.layout.leftMargin + this.mapPercentToWidth(company.female))
+            push()
+            fill(255)
+            textSize(32);
+            textAlign(CENTER);
+            text(company.female + "%",(this.layout.leftMargin + this.mapPercentToWidth(company.female)  + this.mapPercentToWidth(company.male)/2) , lineY-20)
+            pop()
+      }
+      else{
+        fill(70,130,180);
+        rect(this.layout.leftMargin + this.mapPercentToWidth(company.female),
+             lineY,
+             this.mapPercentToWidth(company.male),
+             lineHeight - this.layout.pad);
+      }
     }
 
     // Draw 50% line
@@ -122,7 +164,7 @@ function TechDiversityGender() {
   };
 
   this.drawCategoryLabels = function() {
-    fill(0);
+    fill(255);
     noStroke();
     textAlign('left', 'top');
     text('Female',
